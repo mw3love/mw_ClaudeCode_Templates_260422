@@ -1,0 +1,25 @@
+# 민감 정보
+.credentials.json
+settings.json
+settings.local.json
+
+# 런타임 데이터
+cache/
+sessions/
+shell-snapshots/
+file-history/
+downloads/
+backups/
+debug/
+ide/
+plans/
+todos/
+history.jsonl
+toast.ps1
+
+# 프로젝트별 메모리 (개인 데이터)
+projects/
+
+# OS
+.DS_Store
+Thumbs.db
