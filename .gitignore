@@ -1,25 +1,31 @@
-# 민감 정보
-.credentials.json
+# 개인 설정 및 민감 정보
 settings.json
 settings.local.json
+.credentials.json
+.claude.json
 
-# 런타임 데이터
-cache/
+# 런타임 데이터 (개인 사용 이력)
+memory/
+projects/
 sessions/
-shell-snapshots/
-file-history/
-downloads/
+cache/
+todos/
 backups/
 debug/
+downloads/
+file-history/
 ide/
+local-plugins/
 plans/
-todos/
-history.jsonl
+plugins/
+shell-snapshots/
+skills/
+telemetry/
+
+# 기타
+*.jsonl
+*.log
+desktop.ini
+mcp-needs-auth-cache.json
+setup-toast-notification.ps1
 toast.ps1
-
-# 프로젝트별 메모리 (개인 데이터)
-projects/
-
-# OS
-.DS_Store
-Thumbs.db
