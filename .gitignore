@@ -19,7 +19,6 @@ local-plugins/
 plans/
 plugins/
 shell-snapshots/
-skills/
 telemetry/
 
 # 기타
