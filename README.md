@@ -17,11 +17,12 @@ Claude Code에서 `/스킬명` 으로 호출하는 사용자 정의 명령어.
 # ~/.claude 폴더가 없는 경우
 git clone https://github.com/mw3love/mw_ClaudeCode_Templates_260422.git "$env:USERPROFILE\.claude"
 
-# 이미 ~/.claude가 있는 경우 — remote 연결 후 pull
+# 이미 ~/.claude가 있는 경우 — remote 연결 후 병합
 cd ~/.claude
 git init
 git remote add origin https://github.com/mw3love/mw_ClaudeCode_Templates_260422.git
-git pull origin main
+git fetch origin
+git merge origin/main --allow-unrelated-histories
 ```
 
 Claude Code를 재시작하면 스킬이 자동 인식됩니다.
