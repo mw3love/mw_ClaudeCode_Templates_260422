@@ -33,3 +33,14 @@ Claude Code를 재시작하면 스킬이 자동 인식됩니다.
 cd ~/.claude
 git pull
 ```
+
+## 변경 이력
+
+| 날짜 | 내용 | PC |
+|------|------|-----|
+| 2025-04-15 | setup.ps1에 Write/NotebookEdit/WebFetch/WebSearch 권한 추가 | MW-Lenovo |
+| 2025-04-15 | 전역 CLAUDE.md 추가 (추측 대신 조사 우선 원칙) | MW-Lenovo |
+| 2025-04-15 | Bash 허용 형식 수정 Bash → Bash(*) | MW-Lenovo |
+| 2025-04-14 | commands/templates 제거, skills 구조로 통합 | MW-Lenovo |
+| 2025-04-13 | setup.ps1 추가 및 fix-plan 단계 구조 개선 | MW-Lenovo |
+| 2025-04-12 | 초기 생성 (commands/agents/templates) | MW-Lenovo |
