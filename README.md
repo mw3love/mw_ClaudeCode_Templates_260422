@@ -38,6 +38,7 @@ git pull
 
 | 날짜 | 내용 | PC |
 |------|------|-----|
+| 2025-04-15 | setup.ps1 Edit/Write 권한에 Windows 절대 경로 형식 추가 | MW-Lenovo |
 | 2025-04-15 | setup.ps1에 Write/NotebookEdit/WebFetch/WebSearch 권한 추가 | MW-Lenovo |
 | 2025-04-15 | 전역 CLAUDE.md 추가 (추측 대신 조사 우선 원칙) | MW-Lenovo |
 | 2025-04-15 | Bash 허용 형식 수정 Bash → Bash(*) | MW-Lenovo |
