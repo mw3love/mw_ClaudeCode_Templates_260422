@@ -82,14 +82,14 @@ if ($settings.PSObject.Properties.Name -contains "hooks") {
 # 6. permissions 설정 (Bash 전체 허용 + bypassPermissions)
 if ($settings.PSObject.Properties.Name -contains "permissions") {
     $existingAllow = @($settings.permissions.allow)
-    if ($existingAllow -notcontains "Bash(*)") {
-        Add-Member -InputObject $settings.permissions -NotePropertyName "allow" -NotePropertyValue (@("Bash(*)") + $existingAllow) -Force
-    }
+    $requiredAllow = @("Bash(*)", "Edit(~/.claude/**)", "Write(~/.claude/**)", "NotebookEdit(*)", "WebFetch(*)", "WebSearch(*)")
+    $merged = @($requiredAllow) + @($existingAllow | Where-Object { $_ -notin $requiredAllow })
+    Add-Member -InputObject $settings.permissions -NotePropertyName "allow" -NotePropertyValue $merged -Force
     Add-Member -InputObject $settings.permissions -NotePropertyName "defaultMode" -NotePropertyValue "bypassPermissions" -Force
 } else {
     $settings | Add-Member -NotePropertyName "permissions" -NotePropertyValue (
         [PSCustomObject]@{
-            allow       = @("Bash(*)")
+            allow       = @("Bash(*)", "Edit(~/.claude/**)", "Write(~/.claude/**)", "NotebookEdit(*)", "WebFetch(*)", "WebSearch(*)")
             defaultMode = "bypassPermissions"
         }
     )
