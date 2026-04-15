@@ -37,8 +37,8 @@ if (Test-Path $settingsPath) {
     Write-Host "[OK] settings.json 새로 생성" -ForegroundColor Green
 }
 
-# 3. Stop hook (응답 완료 토스트 알림)
-$stopHook = @(
+# 3. 토스트 알림 hook (Stop + Notification 공용)
+$toastHook = @(
     [PSCustomObject]@{
         hooks = @(
             [PSCustomObject]@{
@@ -64,24 +64,47 @@ $postToolUseHook = @(
     }
 )
 
-# 5. hooks 객체에 등록
+# 5. hooks 객체에 등록 (Stop + Notification + PostToolUse)
 if ($settings.PSObject.Properties.Name -contains "hooks") {
-    Add-Member -InputObject $settings.hooks -NotePropertyName "Stop"        -NotePropertyValue $stopHook        -Force
-    Add-Member -InputObject $settings.hooks -NotePropertyName "PostToolUse" -NotePropertyValue $postToolUseHook -Force
+    Add-Member -InputObject $settings.hooks -NotePropertyName "Stop"         -NotePropertyValue $toastHook       -Force
+    Add-Member -InputObject $settings.hooks -NotePropertyName "Notification" -NotePropertyValue $toastHook       -Force
+    Add-Member -InputObject $settings.hooks -NotePropertyName "PostToolUse"  -NotePropertyValue $postToolUseHook -Force
 } else {
     $settings | Add-Member -NotePropertyName "hooks" -NotePropertyValue (
         [PSCustomObject]@{
-            Stop        = $stopHook
-            PostToolUse = $postToolUseHook
+            Stop         = $toastHook
+            Notification = $toastHook
+            PostToolUse  = $postToolUseHook
         }
     )
 }
 
+# 6. permissions 설정 (Bash 전체 허용 + bypassPermissions)
+if ($settings.PSObject.Properties.Name -contains "permissions") {
+    $existingAllow = @($settings.permissions.allow)
+    if ($existingAllow -notcontains "Bash") {
+        Add-Member -InputObject $settings.permissions -NotePropertyName "allow" -NotePropertyValue (@("Bash") + $existingAllow) -Force
+    }
+    Add-Member -InputObject $settings.permissions -NotePropertyName "defaultMode" -NotePropertyValue "bypassPermissions" -Force
+} else {
+    $settings | Add-Member -NotePropertyName "permissions" -NotePropertyValue (
+        [PSCustomObject]@{
+            allow       = @("Bash")
+            defaultMode = "bypassPermissions"
+        }
+    )
+}
+
+# 7. skipDangerousModePermissionPrompt
+if (-not ($settings.PSObject.Properties.Name -contains "skipDangerousModePermissionPrompt")) {
+    $settings | Add-Member -NotePropertyName "skipDangerousModePermissionPrompt" -NotePropertyValue $true
+}
+
 $json = $settings | ConvertTo-Json -Depth 10
 [System.IO.File]::WriteAllText($settingsPath, $json, $utf8bom)
-Write-Host "[OK] settings.json hooks 등록 완료 (Stop + PostToolUse)" -ForegroundColor Green
+Write-Host "[OK] settings.json 등록 완료 (hooks + permissions)" -ForegroundColor Green
 
-# 6. 알림 테스트
+# 8. 알림 테스트
 Write-Host ""
 Write-Host "토스트 알림 테스트 중..." -ForegroundColor Cyan
 powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File $toastPath
@@ -89,7 +112,8 @@ powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy B
 Write-Host ""
 Write-Host "================================" -ForegroundColor Cyan
 Write-Host "설치 완료!" -ForegroundColor Cyan
-Write-Host "  - agents/  : eval-plan (review / evaluate 모드)" -ForegroundColor White
-Write-Host "  - commands/ : fix-plan (수정계획 생성)" -ForegroundColor White
-Write-Host "  - hooks     : Stop(토스트 알림) + PostToolUse(문서 업데이트 상기)" -ForegroundColor White
+Write-Host "  - agents/ : eval-plan (review / evaluate 모드)" -ForegroundColor White
+Write-Host "  - skills/ : fix-plan (수정계획 생성), version (버전 관리)" -ForegroundColor White
+Write-Host "  - hooks   : Stop + Notification (토스트 알림) + PostToolUse (문서 업데이트 상기)" -ForegroundColor White
+Write-Host "  - 권한    : Bash 전체 허용 + bypassPermissions" -ForegroundColor White
 Write-Host ""

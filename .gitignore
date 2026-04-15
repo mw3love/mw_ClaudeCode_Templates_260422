@@ -19,6 +19,7 @@ local-plugins/
 plans/
 plugins/
 shell-snapshots/
+*.skill
 telemetry/
 
 # 기타
