@@ -82,14 +82,14 @@ if ($settings.PSObject.Properties.Name -contains "hooks") {
 # 6. permissions 설정 (Bash 전체 허용 + bypassPermissions)
 if ($settings.PSObject.Properties.Name -contains "permissions") {
     $existingAllow = @($settings.permissions.allow)
-    if ($existingAllow -notcontains "Bash") {
-        Add-Member -InputObject $settings.permissions -NotePropertyName "allow" -NotePropertyValue (@("Bash") + $existingAllow) -Force
+    if ($existingAllow -notcontains "Bash(*)") {
+        Add-Member -InputObject $settings.permissions -NotePropertyName "allow" -NotePropertyValue (@("Bash(*)") + $existingAllow) -Force
     }
     Add-Member -InputObject $settings.permissions -NotePropertyName "defaultMode" -NotePropertyValue "bypassPermissions" -Force
 } else {
     $settings | Add-Member -NotePropertyName "permissions" -NotePropertyValue (
         [PSCustomObject]@{
-            allow       = @("Bash")
+            allow       = @("Bash(*)")
             defaultMode = "bypassPermissions"
         }
     )
