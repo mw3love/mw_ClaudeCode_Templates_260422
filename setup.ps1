@@ -1,4 +1,4 @@
-# Claude Code 전역 환경 설치 스크립트
+﻿# Claude Code 전역 환경 설치 스크립트
 # GitHub clone 후 한 번만 실행:
 #   powershell.exe -ExecutionPolicy Bypass -File setup.ps1
 
@@ -104,7 +104,26 @@ $json = $settings | ConvertTo-Json -Depth 10
 [System.IO.File]::WriteAllText($settingsPath, $json, $utf8bom)
 Write-Host "[OK] settings.json 등록 완료 (hooks + permissions)" -ForegroundColor Green
 
-# 8. 알림 테스트
+# 8. skills/ 복사
+$repoDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$srcSkills = Join-Path $repoDir "skills"
+$dstSkills = Join-Path $claudeDir "skills"
+if (Test-Path $srcSkills) {
+    if (-not (Test-Path $dstSkills)) { New-Item -ItemType Directory -Path $dstSkills | Out-Null }
+    Copy-Item -Path "$srcSkills\*" -Destination $dstSkills -Recurse -Force
+    Write-Host "[OK] skills/ 복사 완료 → $dstSkills" -ForegroundColor Green
+}
+
+# 9. agents/ 복사
+$srcAgents = Join-Path $repoDir "agents"
+$dstAgents = Join-Path $claudeDir "agents"
+if (Test-Path $srcAgents) {
+    if (-not (Test-Path $dstAgents)) { New-Item -ItemType Directory -Path $dstAgents | Out-Null }
+    Copy-Item -Path "$srcAgents\*" -Destination $dstAgents -Recurse -Force
+    Write-Host "[OK] agents/ 복사 완료 → $dstAgents" -ForegroundColor Green
+}
+
+# 10. 알림 테스트
 Write-Host ""
 Write-Host "토스트 알림 테스트 중..." -ForegroundColor Cyan
 powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File $toastPath
@@ -113,7 +132,7 @@ Write-Host ""
 Write-Host "================================" -ForegroundColor Cyan
 Write-Host "설치 완료!" -ForegroundColor Cyan
 Write-Host "  - agents/ : eval-plan (review / evaluate 모드)" -ForegroundColor White
-Write-Host "  - skills/ : fix-plan (수정계획 생성), version (버전 관리)" -ForegroundColor White
+Write-Host "  - skills/ : fix-plan (수정계획 생성), task-plan, version (버전 관리)" -ForegroundColor White
 Write-Host "  - hooks   : Stop + Notification (토스트 알림) + PostToolUse (문서 업데이트 상기)" -ForegroundColor White
 Write-Host "  - 권한    : Bash 전체 허용 + bypassPermissions" -ForegroundColor White
 Write-Host ""
