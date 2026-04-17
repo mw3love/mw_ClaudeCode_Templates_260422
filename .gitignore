@@ -29,3 +29,4 @@ desktop.ini
 mcp-needs-auth-cache.json
 setup-toast-notification.ps1
 toast.ps1
+!setup/toast.ps1
