@@ -1,47 +1,50 @@
 # mw_ClaudeCode_Templates
 
-Claude Code 전역 설정 및 커스텀 스킬 모음.
+Claude Code 전역 환경 설정 템플릿 모음.
 
-## 스킬 (skills/)
+## 신규 PC 설치
 
-Claude Code에서 `/스킬명` 으로 호출하는 사용자 정의 명령어.
+### 1. 저장소 클론
 
-| 스킬 | 호출 | 설명 |
-|------|------|------|
-| fix-plan | `/fix-plan <문제 설명>` | 버그/이슈 수정계획 문서 자동 생성 |
-| task-plan | `/task-plan` | PRD 분석 후 구현 작업계획 대화식 수립 |
-
-### 설치 (신규 PC)
-
-```powershell
-# ~/.claude 폴더가 없는 경우
-git clone https://github.com/mw3love/mw_ClaudeCode_Templates_260422.git "$env:USERPROFILE\.claude"
-
-# 이미 ~/.claude가 있는 경우 — remote 연결 후 병합
-cd ~/.claude
-git init
-git remote add origin https://github.com/mw3love/mw_ClaudeCode_Templates_260422.git
-git fetch origin
-git merge origin/main --allow-unrelated-histories
+```bash
+git clone https://github.com/mw3love/mw_ClaudeCode_Templates_260422.git
 ```
 
-Claude Code를 재시작하면 스킬이 자동 인식됩니다.
+### 2. 설치 스크립트 실행 (PowerShell)
+
+```powershell
+cd mw_ClaudeCode_Templates_260422\setup
+powershell -ExecutionPolicy Bypass -File install.ps1
+```
+
+한 번 실행으로 아래 항목이 자동 설정됩니다.
+
+| 항목 | 내용 |
+|------|------|
+| CMD | `claude` 입력 시 자동 bypass permissions 모드 |
+| PowerShell | `claude` 입력 시 자동 bypass permissions 모드 |
+| Git Bash | `claude` 입력 시 자동 bypass permissions 모드 |
+| 완료 알림 | 응답 완료 시 Windows 토스트 알림 |
+| settings.json | `skipDangerousModePermissionPrompt` 및 Stop hook 자동 구성 |
+
+> **참고:** Claude Code(`claude.exe`)가 먼저 설치되어 있어야 합니다.
+
+## setup/ 구성
+
+| 파일 | 설명 |
+|------|------|
+| `install.ps1` | 마스터 설치 스크립트 |
+| `claude.cmd` | CMD용 bypass 래퍼 |
+| `profile.ps1` | PowerShell 프로필 함수 |
+| `bashrc_snippet.sh` | Git Bash `.bashrc` 추가 함수 |
+| `toast.ps1` | 응답 완료 Windows 알림 스크립트 |
 
 ## 업데이트
 
-```bash
-cd ~/.claude
+설정 파일이 변경된 경우 pull 후 설치 스크립트를 재실행합니다.
+
+```powershell
 git pull
+cd setup
+powershell -ExecutionPolicy Bypass -File install.ps1
 ```
-
-## 변경 이력
-
-| 날짜 | 내용 | PC |
-|------|------|-----|
-| 2025-04-15 | setup.ps1 Edit/Write 권한에 Windows 절대 경로 형식 추가 | MW-Lenovo |
-| 2025-04-15 | setup.ps1에 Write/NotebookEdit/WebFetch/WebSearch 권한 추가 | MW-Lenovo |
-| 2025-04-15 | 전역 CLAUDE.md 추가 (추측 대신 조사 우선 원칙) | MW-Lenovo |
-| 2025-04-15 | Bash 허용 형식 수정 Bash → Bash(*) | MW-Lenovo |
-| 2025-04-14 | commands/templates 제거, skills 구조로 통합 | MW-Lenovo |
-| 2025-04-13 | setup.ps1 추가 및 fix-plan 단계 구조 개선 | MW-Lenovo |
-| 2025-04-12 | 초기 생성 (commands/agents/templates) | MW-Lenovo |
