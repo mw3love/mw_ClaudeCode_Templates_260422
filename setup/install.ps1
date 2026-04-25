@@ -87,4 +87,14 @@ if (-not ($settings.hooks.PSObject.Properties.Name -contains 'Stop')) {
 $settings | ConvertTo-Json -Depth 10 | Set-Content $settingsPath -Encoding UTF8
 Write-Host "[OK] settings.json 저장 완료" -ForegroundColor Green
 
+# 9. pre-push 훅 설치 (저장소 루트의 .git/hooks/)
+$repoRoot = Split-Path -Parent $scriptDir
+$hooksDir = "$repoRoot\.git\hooks"
+if (Test-Path $hooksDir) {
+    Copy-Item "$scriptDir\hooks\pre-push" "$hooksDir\pre-push" -Force
+    Write-Host "[OK] pre-push 훅 설치 완료" -ForegroundColor Green
+} else {
+    Write-Host "[SKIP] .git/hooks 없음 (git 저장소 아님)" -ForegroundColor Yellow
+}
+
 Write-Host "`n=== 설치 완료! 새 터미널을 열어주세요 ===" -ForegroundColor Cyan

@@ -48,3 +48,8 @@ git pull
 cd setup
 powershell -ExecutionPolicy Bypass -File install.ps1
 ```
+
+## 변경 이력
+
+| 날짜 | PC | 커밋 메시지 |
+|------|----|------------|
