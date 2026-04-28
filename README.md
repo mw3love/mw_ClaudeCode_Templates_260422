@@ -54,3 +54,4 @@ powershell -ExecutionPolicy Bypass -File install.ps1
 | 날짜 | PC | 커밋 메시지 |
 |------|----|------------|
 | 2026-04-25 | Home-Desktop | feat: push 시 README 변경 이력 자동 기록 (pre-push 훅) |
+| 2026-04-28 | Home-N100 | feat: KBS 기안문 전역 draft 스킬 추가 |
