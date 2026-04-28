@@ -43,7 +43,8 @@ powershell -ExecutionPolicy Bypass -File setup.ps1
 | Git Bash | `claude` 입력 시 자동 bypass permissions 모드 |
 | 완료 알림 | 응답 완료 시 Windows 토스트 알림 |
 | settings.json | `skipDangerousModePermissionPrompt` 및 Stop hook 자동 구성 |
-| skills/ | draft, eval-plan 복사 |
+| skills/ | `draft` 복사 → `~/.claude/skills/` |
+| agents/ | `eval-plan` 복사 → `~/.claude/agents/` |
 | git hook | pre-push (README 변경 이력 자동 기록) |
 
 > **참고:** Claude Code(`claude.exe`)가 먼저 설치되어 있어야 합니다.
@@ -53,6 +54,7 @@ powershell -ExecutionPolicy Bypass -File setup.ps1
 설정 파일이 변경된 경우 pull 후 설치 스크립트를 재실행합니다.
 
 ```powershell
+cd mw_ClaudeCode_Templates_260422
 git pull
 powershell -ExecutionPolicy Bypass -File setup.ps1
 ```

@@ -136,7 +136,12 @@ if (Test-Path $srcHooks) {
     Write-Host "[OK] git hooks 설치 완료 → $dstHooks" -ForegroundColor Green
 }
 
-# 11. 알림 테스트
+# 11. 쉘 bypass 별명 설치 (CMD / PowerShell / Git Bash + 레지스트리)
+Write-Host ""
+Write-Host "쉘 bypass 설치 중..." -ForegroundColor Cyan
+& powershell.exe -ExecutionPolicy Bypass -File "$repoDir\setup\install.ps1"
+
+# 12. 알림 테스트
 Write-Host ""
 Write-Host "토스트 알림 테스트 중..." -ForegroundColor Cyan
 powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File $toastPath
