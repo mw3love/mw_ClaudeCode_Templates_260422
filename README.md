@@ -7,7 +7,6 @@ Claude Code 전역 환경 설정 템플릿 모음.
 | 항목 | 종류 | 설명 | 템플릿 포함 |
 |------|------|------|:-----------:|
 | `draft` | skill | KBS 기안문/보고서 작성 (어느 프로젝트에서든 사용) | ✅ |
-| `eval-plan` | agent | 코드 수정계획 사전검토 / 구현 후 평가 | ✅ |
 | `fix-plan` | skill | Fix 수정계획 문서 생성 | ❌ 별도 설치 |
 | `task-plan` | skill | PRD 기반 구현 작업계획 수립 | ❌ 별도 설치 |
 | `version` | skill | KBS Peacock 버전 번호 일괄 변경 + 커밋 | ❌ 별도 설치 |
@@ -44,7 +43,6 @@ powershell -ExecutionPolicy Bypass -File setup.ps1
 | 완료 알림 | 응답 완료 시 Windows 토스트 알림 |
 | settings.json | `skipDangerousModePermissionPrompt` 및 Stop hook 자동 구성 |
 | skills/ | `draft` 복사 → `~/.claude/skills/` |
-| agents/ | `eval-plan` 복사 → `~/.claude/agents/` |
 | git hook | pre-push (README 변경 이력 자동 기록) |
 
 > **참고:** Claude Code(`claude.exe`)가 먼저 설치되어 있어야 합니다.
