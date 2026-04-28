@@ -56,6 +56,7 @@ powershell -ExecutionPolicy Bypass -File setup.ps1
 
 | 날짜 | PC | 커밋 메시지 |
 |------|----|------------|
+| 2026-04-28 | Home-N100 | docs: 포함항목 표에서 미포함 스킬 3개 제거 |
 | 2026-04-28 | Home-N100 | docs: README에서 eval-plan 항목 제거 |
 | 2026-04-28 | Home-N100 | remove: eval-plan 에이전트 제거 |
 | 2026-04-28 | Home-N100 | fix: setup.ps1에 install.ps1 통합 호출, README 설치 안내 단일화 |
