@@ -56,6 +56,7 @@ powershell -ExecutionPolicy Bypass -File setup.ps1
 
 | 날짜 | PC | 커밋 메시지 |
 |------|----|------------|
+| 2026-04-28 | Home-N100 | fix: pre-push 훅을 post-commit으로 교체 (push 충돌 제거) |
 | 2026-04-28 | Home-N100 | fix: pre-push 훅 push 에러 메시지 억제 |
 | 2026-04-28 | Home-N100 | fix: pre-push 훅에서 README 커밋 즉시 push 추가 |
 | 2026-04-28 | Home-N100 | docs: 포함항목 표에서 미포함 스킬 3개 제거 |
