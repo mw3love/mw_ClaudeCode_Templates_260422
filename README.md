@@ -2,6 +2,23 @@
 
 Claude Code 전역 환경 설정 템플릿 모음.
 
+## 포함 항목
+
+| 항목 | 종류 | 설명 | 템플릿 포함 |
+|------|------|------|:-----------:|
+| `draft` | skill | KBS 기안문/보고서 작성 (어느 프로젝트에서든 사용) | ✅ |
+| `eval-plan` | agent | 코드 수정계획 사전검토 / 구현 후 평가 | ✅ |
+| `fix-plan` | skill | Fix 수정계획 문서 생성 | ❌ 별도 설치 |
+| `task-plan` | skill | PRD 기반 구현 작업계획 수립 | ❌ 별도 설치 |
+| `version` | skill | KBS Peacock 버전 번호 일괄 변경 + 커밋 | ❌ 별도 설치 |
+| toast 알림 | hook | 응답 완료 시 Windows 토스트 알림 | ✅ |
+| pre-push 훅 | hook | push 시 README 변경 이력 자동 기록 | ✅ |
+| bypass 래퍼 | shell | `claude` 입력 시 자동 bypass permissions 모드 | ✅ |
+
+> ❌ 항목은 이 repo에 포함되지 않아 새 PC 설치 시 별도로 추가해야 합니다.
+
+---
+
 ## 신규 PC 설치
 
 ### 1. 저장소 클론
@@ -13,8 +30,8 @@ git clone https://github.com/mw3love/mw_ClaudeCode_Templates_260422.git
 ### 2. 설치 스크립트 실행 (PowerShell)
 
 ```powershell
-cd mw_ClaudeCode_Templates_260422\setup
-powershell -ExecutionPolicy Bypass -File install.ps1
+cd mw_ClaudeCode_Templates_260422
+powershell -ExecutionPolicy Bypass -File setup.ps1
 ```
 
 한 번 실행으로 아래 항목이 자동 설정됩니다.
@@ -26,18 +43,10 @@ powershell -ExecutionPolicy Bypass -File install.ps1
 | Git Bash | `claude` 입력 시 자동 bypass permissions 모드 |
 | 완료 알림 | 응답 완료 시 Windows 토스트 알림 |
 | settings.json | `skipDangerousModePermissionPrompt` 및 Stop hook 자동 구성 |
+| skills/ | draft, eval-plan 복사 |
+| git hook | pre-push (README 변경 이력 자동 기록) |
 
 > **참고:** Claude Code(`claude.exe`)가 먼저 설치되어 있어야 합니다.
-
-## setup/ 구성
-
-| 파일 | 설명 |
-|------|------|
-| `install.ps1` | 마스터 설치 스크립트 |
-| `claude.cmd` | CMD용 bypass 래퍼 |
-| `profile.ps1` | PowerShell 프로필 함수 |
-| `bashrc_snippet.sh` | Git Bash `.bashrc` 추가 함수 |
-| `toast.ps1` | 응답 완료 Windows 알림 스크립트 |
 
 ## 업데이트
 
@@ -45,8 +54,7 @@ powershell -ExecutionPolicy Bypass -File install.ps1
 
 ```powershell
 git pull
-cd setup
-powershell -ExecutionPolicy Bypass -File install.ps1
+powershell -ExecutionPolicy Bypass -File setup.ps1
 ```
 
 ## 변경 이력
@@ -54,5 +62,5 @@ powershell -ExecutionPolicy Bypass -File install.ps1
 | 날짜 | PC | 커밋 메시지 |
 |------|----|------------|
 | 2026-04-28 | Home-N100 | fix: setup.ps1에 git hooks 설치 단계 추가 |
-| 2026-04-25 | Home-Desktop | feat: push 시 README 변경 이력 자동 기록 (pre-push 훅) |
 | 2026-04-28 | Home-N100 | feat: KBS 기안문 전역 draft 스킬 추가 |
+| 2026-04-25 | Home-Desktop | feat: push 시 README 변경 이력 자동 기록 (pre-push 훅) |
