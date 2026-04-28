@@ -123,7 +123,20 @@ if (Test-Path $srcAgents) {
     Write-Host "[OK] agents/ 복사 완료 → $dstAgents" -ForegroundColor Green
 }
 
-# 10. 알림 테스트
+# 10. git hooks 설치
+$srcHooks = Join-Path $repoDir "setup\hooks"
+$dstHooks = Join-Path $repoDir ".git\hooks"
+if (Test-Path $srcHooks) {
+    Get-ChildItem $srcHooks | ForEach-Object {
+        $dst = Join-Path $dstHooks $_.Name
+        Copy-Item $_.FullName $dst -Force
+        # Git Bash에서 실행 가능하도록 권한 설정
+        & git -C $repoDir update-index --chmod=+x "setup/hooks/$($_.Name)" 2>$null
+    }
+    Write-Host "[OK] git hooks 설치 완료 → $dstHooks" -ForegroundColor Green
+}
+
+# 11. 알림 테스트
 Write-Host ""
 Write-Host "토스트 알림 테스트 중..." -ForegroundColor Cyan
 powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File $toastPath
@@ -132,7 +145,8 @@ Write-Host ""
 Write-Host "================================" -ForegroundColor Cyan
 Write-Host "설치 완료!" -ForegroundColor Cyan
 Write-Host "  - agents/ : eval-plan (review / evaluate 모드)" -ForegroundColor White
-Write-Host "  - skills/ : fix-plan (수정계획 생성), task-plan, version (버전 관리)" -ForegroundColor White
+Write-Host "  - skills/ : fix-plan (수정계획 생성), task-plan, version (버전 관리), draft (KBS 기안문)" -ForegroundColor White
+Write-Host "  - hooks   : pre-push (README 변경 이력 자동 기록)" -ForegroundColor White
 Write-Host "  - hooks   : Stop + Notification (토스트 알림) + PostToolUse (문서 업데이트 상기)" -ForegroundColor White
 Write-Host "  - 권한    : Bash 전체 허용 + bypassPermissions" -ForegroundColor White
 Write-Host ""
