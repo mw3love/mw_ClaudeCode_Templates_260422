@@ -45,6 +45,7 @@ PYEOF
 
     git add README.md
     git commit -m "docs: 변경 이력 업데이트 ($PC)"
+    git push origin HEAD
 done
 
 exit 0
