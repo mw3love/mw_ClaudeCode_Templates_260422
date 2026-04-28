@@ -7,14 +7,9 @@ Claude Code 전역 환경 설정 템플릿 모음.
 | 항목 | 종류 | 설명 | 템플릿 포함 |
 |------|------|------|:-----------:|
 | `draft` | skill | KBS 기안문/보고서 작성 (어느 프로젝트에서든 사용) | ✅ |
-| `fix-plan` | skill | Fix 수정계획 문서 생성 | ❌ 별도 설치 |
-| `task-plan` | skill | PRD 기반 구현 작업계획 수립 | ❌ 별도 설치 |
-| `version` | skill | KBS Peacock 버전 번호 일괄 변경 + 커밋 | ❌ 별도 설치 |
 | toast 알림 | hook | 응답 완료 시 Windows 토스트 알림 | ✅ |
 | pre-push 훅 | hook | push 시 README 변경 이력 자동 기록 | ✅ |
 | bypass 래퍼 | shell | `claude` 입력 시 자동 bypass permissions 모드 | ✅ |
-
-> ❌ 항목은 이 repo에 포함되지 않아 새 PC 설치 시 별도로 추가해야 합니다.
 
 ---
 
