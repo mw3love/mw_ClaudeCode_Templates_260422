@@ -63,6 +63,7 @@ powershell -ExecutionPolicy Bypass -File setup.ps1
 
 | 날짜 | PC | 커밋 메시지 |
 |------|----|------------|
+| 2026-04-28 | Home-N100 | remove: eval-plan 에이전트 제거 |
 | 2026-04-28 | Home-N100 | fix: setup.ps1에 install.ps1 통합 호출, README 설치 안내 단일화 |
 | 2026-04-28 | Home-N100 | docs: README 전면 개편 (포함항목 표, 변경이력 정렬) |
 | 2026-04-28 | Home-N100 | fix: setup.ps1에 git hooks 설치 단계 추가 |
