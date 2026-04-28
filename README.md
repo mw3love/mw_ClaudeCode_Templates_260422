@@ -8,7 +8,7 @@ Claude Code 전역 환경 설정 템플릿 모음.
 |------|------|------|:-----------:|
 | `draft` | skill | KBS 기안문/보고서 작성 (어느 프로젝트에서든 사용) | ✅ |
 | toast 알림 | hook | 응답 완료 시 Windows 토스트 알림 | ✅ |
-| pre-push 훅 | hook | push 시 README 변경 이력 자동 기록 | ✅ |
+| post-commit 훅 | hook | 커밋 시 README 변경 이력 자동 기록 | ✅ |
 | bypass 래퍼 | shell | `claude` 입력 시 자동 bypass permissions 모드 | ✅ |
 
 ---
@@ -38,7 +38,7 @@ powershell -ExecutionPolicy Bypass -File setup.ps1
 | 완료 알림 | 응답 완료 시 Windows 토스트 알림 |
 | settings.json | `skipDangerousModePermissionPrompt` 및 Stop hook 자동 구성 |
 | skills/ | `draft` 복사 → `~/.claude/skills/` |
-| git hook | pre-push (README 변경 이력 자동 기록) |
+| git hook | post-commit (README 변경 이력 자동 기록) |
 
 > **참고:** Claude Code(`claude.exe`)가 먼저 설치되어 있어야 합니다.
 

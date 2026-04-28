@@ -123,14 +123,17 @@ if (Test-Path $srcAgents) {
     Write-Host "[OK] agents/ 복사 완료 → $dstAgents" -ForegroundColor Green
 }
 
-# 10. git hooks 설치
+# 10. git hooks 설치 (post-commit: README 변경 이력 자동 기록)
 $srcHooks = Join-Path $repoDir "setup\hooks"
 $dstHooks = Join-Path $repoDir ".git\hooks"
 if (Test-Path $srcHooks) {
+    # 구 pre-push 훅 제거
+    $oldHook = Join-Path $dstHooks "pre-push"
+    if (Test-Path $oldHook) { Remove-Item $oldHook -Force }
+
     Get-ChildItem $srcHooks | ForEach-Object {
         $dst = Join-Path $dstHooks $_.Name
         Copy-Item $_.FullName $dst -Force
-        # Git Bash에서 실행 가능하도록 권한 설정
         & git -C $repoDir update-index --chmod=+x "setup/hooks/$($_.Name)" 2>$null
     }
     Write-Host "[OK] git hooks 설치 완료 → $dstHooks" -ForegroundColor Green
