@@ -61,6 +61,7 @@ powershell -ExecutionPolicy Bypass -File setup.ps1
 
 | 날짜 | PC | 커밋 메시지 |
 |------|----|------------|
+| 2026-04-28 | Home-N100 | docs: README 전면 개편 (포함항목 표, 변경이력 정렬) |
 | 2026-04-28 | Home-N100 | fix: setup.ps1에 git hooks 설치 단계 추가 |
 | 2026-04-28 | Home-N100 | feat: KBS 기안문 전역 draft 스킬 추가 |
 | 2026-04-25 | Home-Desktop | feat: push 시 README 변경 이력 자동 기록 (pre-push 훅) |
