@@ -43,7 +43,7 @@ $toastHook = @(
         hooks = @(
             [PSCustomObject]@{
                 type    = "command"
-                command = "powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$toastPath`""
+                command = "powershell.exe -NoProfile -Sta -ExecutionPolicy Bypass -File `"$toastPath`""
                 async   = $true
             }
         )
