@@ -56,6 +56,7 @@ powershell -ExecutionPolicy Bypass -File setup.ps1
 
 | 날짜 | PC | 커밋 메시지 |
 |------|----|------------|
+| 2026-05-02 | Home-Desktop | refactor: setup.ps1 단순화 - git clone/pull 방식으로 전환 |
 | 2026-05-02 | Home-Desktop | fix: toast 알림 PowerShell 옵션 수정 (-NonInteractive → -Sta) |
 | 2026-04-28 | Home-N100 | fix: pre-push 훅을 post-commit으로 교체 (push 충돌 제거) |
 | 2026-04-28 | Home-N100 | fix: pre-push 훅 push 에러 메시지 억제 |
